@@ -37,11 +37,66 @@ STEP 5:Normalizing the data<BR>
 STEP 6:Splitting the data into test and train<BR>
 
 ##  PROGRAM:
-TYPE YOUR CODE HERE
-
-
-## OUTPUT:
-SHOW YOUR OUTPUT HERE
+~~~
+import pandas as pd                                                
+import io
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+~~~
+~~~
+df=pd.read_csv("Churn_Modelling.csv")
+df
+~~~
+![Screenshot 2024-08-23 213816](https://github.com/user-attachments/assets/8c453a1e-6b58-4299-930e-9496b863d4aa)
+~~~
+df.isnull().sum()
+~~~
+![Screenshot 2024-08-23 214741](https://github.com/user-attachments/assets/be4bd280-3e35-49b7-b901-cbc3349292e8)
+~~~
+df.duplicated()
+~~~
+![Screenshot 2024-08-23 215113](https://github.com/user-attachments/assets/078a3603-18ba-4ead-bc9e-6cb40702af0f)
+~~~
+print(df['CreditScore'].describe())
+~~~
+![Screenshot 2024-08-23 215242](https://github.com/user-attachments/assets/9ef684c8-6608-44b2-af5b-2b8797987865)
+~~~
+df.info()
+~~~
+![image](https://github.com/user-attachments/assets/33d07704-6970-4589-b373-15dcdcc3fd34)
+~~~
+df.drop(['Surname','CustomerId','Geography','Gender'],axis=1,inplace=True)
+df
+~~~
+![image](https://github.com/user-attachments/assets/8d561f83-db58-4607-ad9b-bb7f9040e8d8)
+~~~
+scaler=MinMaxScaler()
+df=pd.DataFrame(scaler.fit_transform(df))
+df
+~~~
+![Screenshot 2024-08-23 221238](https://github.com/user-attachments/assets/bca76260-721b-4544-abf3-c0de58767266)
+~~~
+X = df.iloc[:, :-1].values
+print(X)
+~~~
+![Screenshot 2024-08-23 222644](https://github.com/user-attachments/assets/ac7253ae-e50e-42b4-9f09-8ce5a4a76a98)
+~~~
+y = df.iloc[:,-1].values
+print(y)
+~~~
+![Screenshot 2024-08-23 224228](https://github.com/user-attachments/assets/588d924d-edc0-4a38-9c0b-b497c411033a)
+~~~
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=25)
+print(X_train)
+print(len(X_train))
+~~~
+![Screenshot 2024-08-23 224228](https://github.com/user-attachments/assets/242eb640-83ee-43af-9287-cb13c4700e0a)
+~~~
+print(X_test)
+print(len(X_test))
+~~~
+![image](https://github.com/user-attachments/assets/c7eb5132-3481-44f0-9abd-0756bcb49a45)
 
 
 ## RESULT:
